@@ -7,14 +7,12 @@ import { Map } from 'ol';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const buttons = [
-  <IconButton sx={{ color: "#063B60" }} key="one"><DrawIcon /></IconButton>,
-  <IconButton sx={{ color: "#063B60" }} key="two"><CloudUploadIcon /></IconButton>,
-  <IconButton sx={{ color: "#063B60" }} key="three"><DeleteIcon /></IconButton>,
-];
 
 export interface MapButtonsProps {
-    map: Map | null
+    map: Map | null,
+    onAddDraw: () => void,
+    onRemoveFeatures: () => void,
+    onUpload?: () => void; 
 }
 
 export default function MapButtons(props: MapButtonsProps ) {
@@ -23,17 +21,27 @@ export default function MapButtons(props: MapButtonsProps ) {
 
 
     <ButtonGroup
-        sx={{
-            position: "absolute",
-            bottom: "25px",
-            right: "20px",
-            backgroundColor: "white",
-        }}
-        orientation="vertical"
-        aria-label="Vertical button group"
-        variant="contained"
+      sx={{
+        position: "absolute",
+        bottom: "25px",
+        right: "20px",
+        backgroundColor: "white",
+      }}
+      orientation="vertical"
+      aria-label="Vertical button group"
+      variant="contained"
     >
-        {buttons}
+      <IconButton sx={{ color: "#063B60" }} onClick={props.onAddDraw} >
+        <DrawIcon />
+      </IconButton>
+
+      <IconButton sx={{ color: "#063B60" }} onClick={props.onUpload}>
+        <CloudUploadIcon />
+      </IconButton>
+
+      <IconButton sx={{ color: "#063B60" }} onClick={props.onRemoveFeatures} >
+        <DeleteIcon />
+      </IconButton>
     </ButtonGroup>
 
   );
